@@ -47,10 +47,11 @@ function addTask() {
     commentSpan.innerHTML = '💬';
     commentSpan.className = 'comment';
     li.appendChild(commentSpan);
-
     // Add status select dropdown
     addStatusSelect(li);
 
+    // Add date input
+    addDateInput(li);
     // Save the current state of the list to localStorage
     saveData();
     
@@ -100,8 +101,11 @@ function saveData() {
     localStorage.setItem('data', listContainer.innerHTML);
 }
 
+// Function to add a status select dropdown to a list item
 function addStatusSelect(li) {
+    // Check if the status select already exists
     if (!li.querySelector('select')) {
+        // Create the status select element
         let status = document.createElement('select');
         status.innerHTML = `
             <option value="clear">Clear</option>
@@ -112,6 +116,7 @@ function addStatusSelect(li) {
         `;
         status.className = 'status';
 
+        // Add event listener for status change
         status.addEventListener('change', (event) => {
             li.className = event.target.value; // Set class based on status
             li.setAttribute('data-status', event.target.value); // Save status as attribute
@@ -119,9 +124,24 @@ function addStatusSelect(li) {
         });
 
         li.appendChild(status);
-        
     }
 }
+
+
+function addDateInput(li) {
+    if(!li.querySelector('input[type="date"]')) {
+        let dateInput = document.createElement('input');
+        dateInput.type = 'date';
+        dateInput.className = 'date';
+        li.appendChild(dateInput);
+
+        dateInput.addEventListener('change', (event) => {
+            li.setAttribute('data-date', event.target.value);
+            saveData();
+        });
+    }
+}
+
 
 // function to load data from the localStorage
 function loadData() {
@@ -178,12 +198,10 @@ onMount(() => {
          <!-- Button to add a new task -->
         <button on:click|preventDefault={addTask} class="add-task-button" type="submit">Add Task</button>
         <!-- List container for displaying tasks -->
-
             <ul bind:this={listContainer} id="listContainer" on:click={handleClick} on:keydown={handleClick}>
 
             </ul>
     </form >
-
 
   </main> 
 <footer>
@@ -433,6 +451,13 @@ onMount(() => {
     box-shadow: 0 0 4px rgba(20, 130, 140, 0.4);
 }
 
-
+:global(#listContainer li .date) {
+    position: absolute;
+    left: 510px;
+    top: 50%;
+    width: 15px;
+    
+    transform: translateY(-50%);
+}
 
 </style>
