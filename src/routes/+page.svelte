@@ -172,17 +172,16 @@ onMount(() => {
     loadData();
 });
 
-
-
-
 </script>
 
 
 
 <!-- html for the todo application --> 
 <header>
+    <img class="Logo" src="/Logo/t_logo_01_midtstilt_rgb.png" alt="...">
     <h1>
-        To Do Application 
+    
+        To Do Application
     </h1>
 </header>
 <main>
@@ -204,23 +203,22 @@ onMount(() => {
     </form >
 
   </main> 
-<footer>
-    <p class="footer-text">© 2025 To Do Application. All rights reserved.</p> 
-</footer>
+
 
 <!-- Style section for the To Do Application -->
 <style>
     :global(body) {
         margin: 0;
         font-family: Arial, sans-serif;
-        background-color: #E5EEEF; /* Vann 10% */
+        background-color:  #E8F0F0; 
     }
 
     header {
-        background-color: #005260; /* Vann */
+        background-color:  #A4C4C4; /* Vann */
         color: white;
         padding: 10px 0;
         text-align: center;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     }
 
     main {
@@ -342,6 +340,7 @@ onMount(() => {
         top: 50%;
         transform: translateY(-50%);
         line-height: 1;
+        
     }
 
     :global(ul li.checked) {
@@ -458,6 +457,10 @@ onMount(() => {
     width: 15px;
     
     transform: translateY(-50%);
+}
+.Logo {
+    width: 70px;
+    height: 70px; 
 }
 
 </style>
