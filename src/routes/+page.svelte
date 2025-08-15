@@ -158,12 +158,26 @@ function loadData() {
                 statusSelect.value = savedStatus;
                 li.className = savedStatus;
             }
-            
+            // Re-attach change event listener
             statusSelect.addEventListener('change', (event) => {
                 li.className = event.target.value; // Set class based on status
                 li.setAttribute('data-status', event.target.value); // Save status as attribute
                 saveData(); // Save the updated state
             });
+
+            const dateInput = li.querySelector('input[type="date"]');
+            if (dateInput) {
+                // Restore the date value from saved data
+                const savedDate = li.getAttribute('data-date');
+                if (savedDate) {
+                    dateInput.value = savedDate;
+                }
+                // Re-attach change event listener
+                dateInput.addEventListener('change', (event) => {
+                    li.setAttribute('data-date', event.target.value);
+                    saveData();
+                });
+            }
         }
     });
 }
@@ -210,11 +224,11 @@ onMount(() => {
     :global(body) {
         margin: 0;
         font-family: Arial, sans-serif;
-        background-color:  #E8F0F0; 
+        background-color: white; 
     }
 
     header {
-        background-color:  #A4C4C4; /* Vann */
+        background-color:   #D0E6E8; /* Vann */
         color: white;
         padding: 10px 0;
         text-align: center;
@@ -229,6 +243,7 @@ onMount(() => {
         margin: 0 0 10px;
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         font-weight: 600;
+        color: black;
     }
 
     p {
@@ -239,21 +254,6 @@ onMount(() => {
         text-align: center;
         display: flex;
         justify-content: center;
-    }
-
-    footer {
-        background-color: #1C6C6C; /* Hav */
-        padding: 10px 0;
-        text-align: center;
-        margin-top: 30px;
-    }
-
-    .footer-text {
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-        color: #ffffff;
     }
 
     .todo-list {
